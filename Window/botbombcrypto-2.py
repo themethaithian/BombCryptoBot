@@ -172,7 +172,11 @@ try:
                         pyautogui.moveTo(newMap[0], newMap[1])
                         time.sleep(1)
                         pyautogui.click(newMap[0], newMap[1])
-                        time.sleep(0.5)
+                        time.sleep(1)
+                        pyautogui.click(newMap[0], newMap[1])
+                        time.sleep(1)
+                        pyautogui.click(newMap[0], newMap[1])
+                        time.sleep(1)
                         pyautogui.click(newMap[0], newMap[1])
                         print('Change Map...')
                     timeCheck = 0
@@ -185,6 +189,10 @@ try:
                         pyautogui.click(backButton[0], backButton[1])
                     print('Reseting Position...')
                     time.sleep(5)
+                    pyautogui.moveTo(hunt[0], hunt[1])
+                    time.sleep(1)
+                    pyautogui.click(hunt[0], hunt[1])
+                    time.sleep(1)
                     pyautogui.click(hunt[0], hunt[1])
                     timeResetCount = 0
                 elif timeRestartCount >= 3600:
