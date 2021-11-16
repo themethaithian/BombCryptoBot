@@ -125,6 +125,8 @@ try:
                 if closeHero == None:
                     continue
                 pyautogui.click(closeHero[0], closeHero[1])
+                time.sleep(0.5)
+                pyautogui.click(closeHero[0], closeHero[1])
                 break
                 
             while isError == False:
@@ -140,6 +142,8 @@ try:
                     continue
                 if(hunt == None):
                     continue
+                pyautogui.click(hunt[0], hunt[1])
+                time.sleep(0.5)
                 pyautogui.click(hunt[0], hunt[1])
                 print('Start...')
                 break
