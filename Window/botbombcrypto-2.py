@@ -124,6 +124,8 @@ try:
                     break
                 if closeHero == None:
                     continue
+                pyautogui.moveTo(closeHero[0], closeHero[1])
+                time.sleep(1)
                 pyautogui.click(closeHero[0], closeHero[1])
                 time.sleep(0.5)
                 pyautogui.click(closeHero[0], closeHero[1])
@@ -142,6 +144,8 @@ try:
                     continue
                 if(hunt == None):
                     continue
+                pyautogui.moveTo(hunt[0], hunt[1])
+                time.sleep(1)
                 pyautogui.click(hunt[0], hunt[1])
                 time.sleep(0.5)
                 pyautogui.click(hunt[0], hunt[1])
@@ -158,14 +162,15 @@ try:
                     error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 600, 750, 600), confidence = 0.7)
                     if error != None:
                         pyautogui.click(error[0], error[1])
-                        time.sleep(0.5)
+                        time.sleep(1)
                         pyautogui.hotkey('ctrl', 'shift', 'r')
                         isError = True
                         print('Error -- Reloading')
                         time.sleep(5)
                         break
                     if newMap != None:
-                        time.sleep(0.5)
+                        pyautogui.moveTo(newMap[0], newMap[1])
+                        time.sleep(1)
                         pyautogui.click(newMap[0], newMap[1])
                         time.sleep(0.5)
                         pyautogui.click(newMap[0], newMap[1])
@@ -176,7 +181,7 @@ try:
                     backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (0, 600, 750, 600), confidence = 0.7)
                     if backButton != None:
                         pyautogui.click(backButton[0], backButton[1])
-                        time.sleep(0.5)
+                        time.sleep(1)
                         pyautogui.click(backButton[0], backButton[1])
                     print('Reseting Position...')
                     time.sleep(5)
@@ -184,6 +189,8 @@ try:
                     timeResetCount = 0
                 elif timeRestartCount >= 3600:
                     if backButton != None:
+                        pyautogui.moveTo(backButton[0], backButton[1])
+                        time.sleep(1)
                         pyautogui.click(backButton[0], backButton[1])
                         time.sleep(0.5)
                         pyautogui.click(backButton[0], backButton[1])
