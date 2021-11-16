@@ -5,7 +5,7 @@ try:
     while True:
         time.sleep(7)
         while True:
-            connectButton = pyautogui.locateCenterOnScreen('Image/Connect67.png', region = (0, 0, 750, 600), confidence = 0.7)
+            connectButton = pyautogui.locateCenterOnScreen('Image/Connect67.png', region = (750, 0, 750, 600), confidence = 0.7)
             if connectButton == None:
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('Connect Not Found -- Reloading')
@@ -16,7 +16,7 @@ try:
             break
         time.sleep(5)
 
-        mmButton = pyautogui.locateCenterOnScreen('Image/Meta67.png', region = (0, 0, 750, 600), confidence = 0.7)
+        mmButton = pyautogui.locateCenterOnScreen('Image/Meta67.png', region = (750, 0, 750, 600), confidence = 0.7)
         if mmButton == None:
             pyautogui.hotkey('ctrl', 'shift', 'r')
             print('MetaMask Not Found -- Reloading')
@@ -26,7 +26,7 @@ try:
         time.sleep(5)
 
         while True:
-            signButton = pyautogui.locateCenterOnScreen('Image/Sign67.png', region = (0, 0, 750, 600), confidence = 0.7)
+            signButton = pyautogui.locateCenterOnScreen('Image/Sign67.png', region = (750, 0, 750, 600), confidence = 0.7)
             if signButton == None:
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('MetaMask Not Found -- Reloading')
@@ -53,8 +53,8 @@ try:
             timeCheck = 0
             isError = False
 
-            selectHero = pyautogui.locateCenterOnScreen('Image/Hero67.png', region = (0, 0, 750, 600), confidence = 0.7)
-            error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+            selectHero = pyautogui.locateCenterOnScreen('Image/Hero67.png', region = (750, 0, 750, 600), confidence = 0.7)
+            error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
             if error != None:
                 pyautogui.click(error[0], error[1])
                 time.sleep(0.5)
@@ -72,8 +72,8 @@ try:
             time.sleep(1)
 
             while isError == False:
-                homeButton = pyautogui.locateCenterOnScreen('Image/Home67.png', region = (0, 0, 750, 600), confidence = 0.7)
-                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                homeButton = pyautogui.locateCenterOnScreen('Image/Home67.png', region = (750, 0, 750, 600), confidence = 0.7)
+                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
                 if error != None:
                     pyautogui.click(error[0], error[1])
                     time.sleep(0.5)
@@ -95,8 +95,8 @@ try:
             if isError == False:
                 print('Bring Hero To Work...')
                 while True:
-                    workButton = pyautogui.locateCenterOnScreen('Image/Work67.png', region = (0, 0, 750, 600), confidence = 0.95)
-                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                    workButton = pyautogui.locateCenterOnScreen('Image/Work67.png', region = (750, 0, 750, 600), confidence = 0.95)
+                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
                     if error != None:
                         pyautogui.click(error[0], error[1])
                         time.sleep(0.5)
@@ -112,8 +112,8 @@ try:
                     break
 
             while isError == False:
-                closeHero = pyautogui.locateCenterOnScreen('Image/CloseHero67.png', region = (0, 0, 750, 600), confidence = 0.7)
-                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                closeHero = pyautogui.locateCenterOnScreen('Image/CloseHero67.png', region = (750, 0, 750, 600), confidence = 0.7)
+                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
                 if error != None:
                     pyautogui.click(error[0], error[1])
                     time.sleep(0.5)
@@ -128,8 +128,8 @@ try:
                 break
                 
             while isError == False:
-                hunt = pyautogui.locateCenterOnScreen('Image/Hunt67.png', region = (0, 0, 750, 600), confidence = 0.7)
-                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                hunt = pyautogui.locateCenterOnScreen('Image/Hunt67.png', region = (750, 0, 750, 600), confidence = 0.7)
+                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
                 if error != None:
                     pyautogui.click(error[0], error[1])
                     time.sleep(0.5)
@@ -150,8 +150,8 @@ try:
                 timeCheck += 60
                 
                 if timeCheck >= 120:
-                    newMap = pyautogui.locateCenterOnScreen('Image/NewMap67.png', region = (0, 0, 750, 600), confidence = 0.7)
-                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                    newMap = pyautogui.locateCenterOnScreen('Image/NewMap67.png', region = (750, 0, 750, 600), confidence = 0.7)
+                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
                     if error != None:
                         pyautogui.click(error[0], error[1])
                         time.sleep(0.5)
@@ -160,7 +160,6 @@ try:
                         print('Error -- Reloading')
                         time.sleep(5)
                         break
-                    
                     if newMap != None:
                         time.sleep(0.5)
                         pyautogui.click(newMap[0], newMap[1])
@@ -170,7 +169,7 @@ try:
                     timeCheck = 0
 
                 if timeResetCount >=300:
-                    backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                    backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (750, 0, 750, 600), confidence = 0.7)
                     if backButton != None:
                         pyautogui.click(backButton[0], backButton[1])
                         time.sleep(0.5)
@@ -180,11 +179,12 @@ try:
                     pyautogui.click(hunt[0], hunt[1])
                     timeResetCount = 0
                 elif timeRestartCount >= 3600:
-                    backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (0, 0, 750, 600), confidence = 0.7)
                     if backButton != None:
                         pyautogui.click(backButton[0], backButton[1])
                         time.sleep(0.5)
                         pyautogui.click(backButton[0], backButton[1])
+                    time.sleep(0.5)
+                    pyautogui.click(backButton[0], backButton[1])
                     time.sleep(5)
                     print('Restarting Flow...')
                     break
