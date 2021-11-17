@@ -67,6 +67,10 @@ try:
                 pyautogui.hotkey('ctrl', 'shift,' 'r')
                 print('Cant Load Game -- Reload')
                 break
+            pyautogui.moveTo(selectHero[0], selectHero[1])
+            time.sleep(1)
+            pyautogui.click(selectHero[0], selectHero[1])
+            time.sleep(1)
             pyautogui.click(selectHero[0], selectHero[1])
             print('Open Heroes Screen...')
             time.sleep(1)
@@ -182,8 +186,16 @@ try:
                     timeCheck = 0
 
                 if timeResetCount >=180:
-                    backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (750, 0, 750, 600), confidence = 0.7)
-                    if backButton != None:
+                    if backButton == None:
+                        backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (750, 0, 750, 600), confidence = 0.7)
+                        pyautogui.moveTo(backButton[0], backButton[1])
+                        time.sleep(1)
+                        pyautogui.click(backButton[0], backButton[1])
+                        time.sleep(1)
+                        pyautogui.click(backButton[0], backButton[1])
+                    elif backButton != None:
+                        pyautogui.moveTo(backButton[0], backButton[1])
+                        time.sleep(1)
                         pyautogui.click(backButton[0], backButton[1])
                         time.sleep(1)
                         pyautogui.click(backButton[0], backButton[1])

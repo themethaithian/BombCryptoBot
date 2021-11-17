@@ -1,0 +1,14 @@
+E:
+cd E:\Bombcrypto\BombCryptoBot\Window
+bot\Scripts\activate.bat
+py botbombcrypto-1.py
+
+E:
+cd E:\Bombcrypto\BombCryptoBot\Window
+bot\Scripts\activate.bat
+py botbombcrypto-2.py
+
+E:
+cd E:\Bombcrypto\BombCryptoBot\Window
+bot\Scripts\activate.bat
+py botbombcrypto-3.py
