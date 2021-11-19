@@ -12,7 +12,7 @@ try:
         f.write('T')
         f.close()
         while True:
-            connectButton = pyautogui.locateCenterOnScreen('Image/Connect67.png', region = (0, 0, 750, 600), confidence = 0.7)
+            connectButton = pyautogui.locateCenterOnScreen('Image/Connect67.png', region = (750,  550, 750, 600), confidence = 0.7)
             if connectButton == None:
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('Connect Not Found -- Reloading')
@@ -24,7 +24,7 @@ try:
             break
         time.sleep(5)
 
-        mmButton = pyautogui.locateCenterOnScreen('Image/Meta67.png', region = (0, 0, 750, 600), confidence = 0.7)
+        mmButton = pyautogui.locateCenterOnScreen('Image/Meta67.png', region = (750,  550, 750, 600), confidence = 0.7)
         if mmButton == None:
             pyautogui.hotkey('ctrl', 'shift', 'r')
             print('MetaMask Not Found -- Reloading')
@@ -35,7 +35,7 @@ try:
         time.sleep(5)
 
         while True:
-            signButton = pyautogui.locateCenterOnScreen('Image/Sign67.png', region = (0, 0, 750, 600), confidence = 0.7)
+            signButton = pyautogui.locateCenterOnScreen('Image/Sign67.png', region = (750,  550, 750, 600), confidence = 0.7)
             if signButton == None:
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('MetaMask Not Found -- Reloading')
@@ -66,8 +66,8 @@ try:
             timeCheck = 0
             isError = False
 
-            selectHero = pyautogui.locateCenterOnScreen('Image/Hero67.png', region = (0, 0, 750, 600), confidence = 0.7)
-            error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+            selectHero = pyautogui.locateCenterOnScreen('Image/Hero67.png', region = (750,  550, 750, 600), confidence = 0.7)
+            error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750,  550, 750, 600), confidence = 0.7)
             
             f = open('MouseUsed.txt', 'r')
             while f.read() == 'T':
@@ -107,8 +107,8 @@ try:
             time.sleep(1)
 
             while isError == False:
-                homeButton = pyautogui.locateCenterOnScreen('Image/Home67.png', region = (0, 0, 750, 600), confidence = 0.7)
-                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                homeButton = pyautogui.locateCenterOnScreen('Image/Home67.png', region = (750,  550, 750, 600), confidence = 0.7)
+                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750,  550, 750, 600), confidence = 0.7)
                 f = open('MouseUsed.txt', 'r')
                 while f.read() == 'T':
                     continue
@@ -152,8 +152,8 @@ try:
                 f.write('T')
                 f.close()
                 while True:
-                    workButton = pyautogui.locateCenterOnScreen('Image/Work67.png', region = (0, 0, 750, 600), confidence = 0.95)
-                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                    workButton = pyautogui.locateCenterOnScreen('Image/Work67.png', region = (750,  550, 750, 600), confidence = 0.95)
+                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750,  550, 750, 600), confidence = 0.7)
                     if error != None:
                         pyautogui.click(error[0], error[1])
                         time.sleep(0.5)
@@ -175,8 +175,8 @@ try:
                     break
 
             while isError == False:
-                closeHero = pyautogui.locateCenterOnScreen('Image/CloseHero67.png', region = (0, 0, 750, 600), confidence = 0.7)
-                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                closeHero = pyautogui.locateCenterOnScreen('Image/CloseHero67.png', region = (750,  550, 750, 600), confidence = 0.7)
+                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750,  550, 750, 600), confidence = 0.7)
                 f = open('MouseUsed.txt', 'r')
                 while f.read() == 'T':
                     continue
@@ -208,8 +208,8 @@ try:
                 break
                 
             while isError == False:
-                hunt = pyautogui.locateCenterOnScreen('Image/Hunt67.png', region = (0, 0, 750, 600), confidence = 0.7)
-                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                hunt = pyautogui.locateCenterOnScreen('Image/Hunt67.png', region = (750,  550, 750, 600), confidence = 0.7)
+                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750,  550, 750, 600), confidence = 0.7)
                 f = open('MouseUsed.txt', 'r')
                 while f.read() == 'T':
                     continue
@@ -247,8 +247,8 @@ try:
                 timeCheck += 60
                 
                 if timeCheck >= 120:
-                    newMap = pyautogui.locateCenterOnScreen('Image/NewMap67.png', region = (0, 0, 750, 600), confidence = 0.7)
-                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                    newMap = pyautogui.locateCenterOnScreen('Image/NewMap67.png', region = (750,  550, 750, 600), confidence = 0.7)
+                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750,  550, 750, 600), confidence = 0.7)
                     f = open('MouseUsed.txt', 'r')
                     while f.read() == 'T':
                         continue
@@ -292,7 +292,7 @@ try:
                     f.write('T')
                     f.close()
                     if backButton == None:
-                        backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (0, 0, 750, 600), confidence = 0.7)
+                        backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (750,  550, 750, 600), confidence = 0.7)
                         pyautogui.moveTo(backButton[0], backButton[1])
                         time.sleep(1)
                         pyautogui.click(backButton[0], backButton[1])
