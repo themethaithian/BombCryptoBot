@@ -3,12 +3,10 @@ import time
 
 try:
     while True:
-        time.sleep(15)
-        f = open('MouseUsed.txt', 'r')
-        while open('MouseUsed.txt', 'r') == 'T':
+        time.sleep(10)
+        while open('MouseUsed.txt', 'r').read() == 'T':
             time.sleep(3.2)
             continue
-        f.close()
         f = open('MouseUsed.txt', 'w')
         f.write('T')
         f.close()
@@ -17,7 +15,7 @@ try:
             if connectButton == None:
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('Connect Not Found -- Reloading')
-                time.sleep(5)
+                time.sleep(10)
                 continue
             pyautogui.moveTo(connectButton[0], connectButton[1])
             pyautogui.click(connectButton[0], connectButton[1])
@@ -70,10 +68,9 @@ try:
             selectHero = pyautogui.locateCenterOnScreen('Image/Hero67.png', region = (750, 0, 750, 600), confidence = 0.7)
             error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
             
-            while open('MouseUsed.txt', 'r') == 'T':
+            while open('MouseUsed.txt', 'r').read() == 'T':
                 time.sleep(3.2)
                 continue
-            f.close()
             f = open('MouseUsed.txt', 'w')
             f.write('T')
             f.close()
@@ -107,16 +104,16 @@ try:
             f.close()
             time.sleep(1)
 
+            while open('MouseUsed.txt', 'r').read() == 'T':
+                time.sleep(3.2)
+                continue
+            f = open('MouseUsed.txt', 'w')
+            f.write('T')
+            f.close()
             while isError == False:
                 homeButton = pyautogui.locateCenterOnScreen('Image/Home67.png', region = (750, 0, 750, 600), confidence = 0.7)
                 error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
-                while open('MouseUsed.txt', 'r') == 'T':
-                    time.sleep(3.2)
-                    continue
-                f.close()
-                f = open('MouseUsed.txt', 'w')
-                f.write('T')
-                f.close()
+                
                 if error != None:
                     pyautogui.click(error[0], error[1])
                     time.sleep(0.5)
@@ -164,13 +161,6 @@ try:
             while isError == False:
                 closeHero = pyautogui.locateCenterOnScreen('Image/CloseHero67.png', region = (750, 0, 750, 600), confidence = 0.7)
                 error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 0, 750, 600), confidence = 0.7)
-                while open('MouseUsed.txt', 'r') == 'T':
-                    time.sleep(3.2)
-                    continue
-                f.close()
-                f = open('MouseUsed.txt', 'w')
-                f.write('T')
-                f.close()
                 if error != None:
                     pyautogui.click(error[0], error[1])
                     time.sleep(0.5)
@@ -223,10 +213,9 @@ try:
                 timeRestartCount += 60
                 timeCheck += 60
                 f = open('MouseUsed.txt', 'r')
-                while open('MouseUsed.txt', 'r') == 'T':
+                while open('MouseUsed.txt', 'r').read() == 'T':
                     time.sleep(3.2)
                     continue
-                f.close()
                 f = open('MouseUsed.txt', 'w')
                 f.write('T')
                 f.close()

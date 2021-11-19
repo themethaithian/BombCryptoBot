@@ -1,7 +1,8 @@
 import pyautogui
 
-f = open('MouseUsed.txt', 'r')
-print(f.read() == 'F')
+while open('MouseUsed.txt', 'r') == 'T':
+    continue
+print('out')
 
 
 # pyautogui.displayMousePosition()
