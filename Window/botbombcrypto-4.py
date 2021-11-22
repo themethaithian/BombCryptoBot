@@ -13,6 +13,8 @@ try:
         while True:
             connectButton = pyautogui.locateCenterOnScreen('Image/Connect67.png', region = (750, 550, 750, 600), confidence = 0.7)
             if connectButton == None:
+                pyautogui.moveTo(1125, 850)
+                pyautogui.click(1125, 850)
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('Connect Not Found -- Reloading')
                 time.sleep(10)
@@ -25,6 +27,8 @@ try:
 
         mmButton = pyautogui.locateCenterOnScreen('Image/Meta67.png', region = (750, 550, 750, 600), confidence = 0.7)
         if mmButton == None:
+            pyautogui.moveTo(1125, 850)
+            pyautogui.click(1125, 850)
             pyautogui.hotkey('ctrl', 'shift', 'r')
             print('MetaMask Not Found -- Reloading')
             continue
@@ -36,6 +40,8 @@ try:
         while True:
             signButton = pyautogui.locateCenterOnScreen('Image/Sign67.png', region = (750, 550, 750, 600), confidence = 0.7)
             if signButton == None:
+                pyautogui.moveTo(1125, 850)
+                pyautogui.click(1125, 850)
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('MetaMask Not Found -- Reloading')
                 continue
@@ -218,9 +224,9 @@ try:
                 f = open('MouseUsed.txt', 'w')
                 f.write('T')
                 f.close()
+                error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 550, 750, 600), confidence = 0.7)
                 if timeCheck >= 120:
                     newMap = pyautogui.locateCenterOnScreen('Image/NewMap67.png', region = (750, 550, 750, 600), confidence = 0.7)
-                    error = pyautogui.locateCenterOnScreen('Image/Error67.png', region = (750, 550, 750, 600), confidence = 0.7)
                     if error != None:
                         pyautogui.click(error[0], error[1])
                         time.sleep(1)
@@ -250,6 +256,17 @@ try:
                     timeCheck = 0
 
                 if timeResetCount >= 180:
+                    if error != None:
+                        pyautogui.click(error[0], error[1])
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'shift', 'r')
+                        isError = True
+                        print('Error -- Reloading')
+                        time.sleep(5)
+                        f = open('MouseUsed.txt', 'w')
+                        f.write('F')
+                        f.close()
+                        break
                     if backButton == None:
                         backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (750, 550, 750, 600), confidence = 0.7)
                         pyautogui.moveTo(backButton[0], backButton[1])
@@ -272,6 +289,17 @@ try:
                     pyautogui.click(hunt[0], hunt[1])
                     timeResetCount = 0
                 elif timeRestartCount >= 3000:
+                    if error != None:
+                        pyautogui.click(error[0], error[1])
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'shift', 'r')
+                        isError = True
+                        print('Error -- Reloading')
+                        time.sleep(5)
+                        f = open('MouseUsed.txt', 'w')
+                        f.write('F')
+                        f.close()
+                        break
                     if backButton != None:
                         pyautogui.moveTo(backButton[0], backButton[1])
                         time.sleep(1)
