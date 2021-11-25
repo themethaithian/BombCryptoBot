@@ -1,11 +1,11 @@
 import pyautogui
 import time
 
-region = (550, 375, 550, 600)
-center = (region[0] + region[2] / 2, region[1] + 375 / 2 )
-waitTime = 5.2
-queueNum = '5'
-nextQueue = '6'
+region = (0, 700, 550, 350)
+center = (region[0] + region[2] / 2, region[1] + 350 / 2 )
+waitTime = 7.2
+queueNum = '7'
+nextQueue = '1'
 
 try:
     while True:
