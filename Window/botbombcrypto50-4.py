@@ -44,22 +44,22 @@ try:
             break
         time.sleep(5)
 
-        mmButton = pyautogui.locateCenterOnScreen('Image50/Meta50.png', region = region, confidence = 0.7)
-        if mmButton == None:
-            pyautogui.moveTo(center)
-            time.sleep(0.5)
-            pyautogui.click(center)
-            time.sleep(0.5)
-            pyautogui.hotkey('ctrl', 'shift', 'r')
-            print('MetaMask Not Found -- Reloading')
-            f = open('MouseUsed.txt', 'w')
-            f.write('F')
-            f.close()
-            continue
-        pyautogui.moveTo(mmButton[0], mmButton[1])
-        pyautogui.click(mmButton[0], mmButton[1])
-        print('Signing MetaMask...')
-        time.sleep(5)
+        # mmButton = pyautogui.locateCenterOnScreen('Image50/Meta50.png', region = region, confidence = 0.7)
+        # if mmButton == None:
+        #     pyautogui.moveTo(center)
+        #     time.sleep(0.5)
+        #     pyautogui.click(center)
+        #     time.sleep(0.5)
+        #     pyautogui.hotkey('ctrl', 'shift', 'r')
+        #     print('MetaMask Not Found -- Reloading')
+        #     f = open('MouseUsed.txt', 'w')
+        #     f.write('F')
+        #     f.close()
+        #     continue
+        # pyautogui.moveTo(mmButton[0], mmButton[1])
+        # pyautogui.click(mmButton[0], mmButton[1])
+        # print('Signing MetaMask...')
+        # time.sleep(5)
 
         while True:
             signButton = pyautogui.locateCenterOnScreen('Image50/Sign50.png', region = region, confidence = 0.7)
@@ -73,7 +73,7 @@ try:
                 f = open('MouseUsed.txt', 'w')
                 f.write('F')
                 f.close()
-                continue
+                break
             pyautogui.moveTo(signButton[0], signButton[1])
             pyautogui.click(signButton[0], signButton[1])
             print('Loading...')
@@ -173,8 +173,9 @@ try:
                     pyautogui.click(homeButton[0], homeButton[1])
                     pyautogui.scroll(-1)
                     time.sleep(0.05)
+                time.sleep(1)
                 break
-
+            heroCount = 0
             if isError == False:
                 error = None
                 print('Bring Hero To Work...')
@@ -216,6 +217,8 @@ try:
                         break
                     if workButton != None:
                         pyautogui.click(workButton[0], workButton[1])
+                        heroCount += 1
+                        print('Hero: ', heroCount)
                         time.sleep(1)
                         continue
                     break
@@ -366,7 +369,7 @@ try:
                     pyautogui.click(hunt[0], hunt[1])
                     timeResetCount = 0
                 
-                if timeRestartCount >= 2400:
+                if timeRestartCount >= 1800:
                     if error != None:
                         pyautogui.moveTo(error[0], error[1])
                         time.sleep(1)
