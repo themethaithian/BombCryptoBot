@@ -1,6 +1,9 @@
 E:
-cd E:\Bombcrypto\BombCryptoBot\Window
-bot\Scripts\activate.bat
+cd E:\BombCryptoBot-main\BombCryptoBot-main\Window
+env\Scripts\activate
+cls
+
+
 py botbombcrypto50-1.py
 
 E:
