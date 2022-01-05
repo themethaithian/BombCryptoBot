@@ -6,24 +6,21 @@ center = (region[0] + region[2] / 2, region[1] + 375 / 2 )
 waitTime = 4.2
 queueNum = '4'
 nextQueue = '5'
+newMapTimer = 120
+RepositionTimer = 180
+ResetTimer = 3000
 
 try:
     while True:
+        isError = False
         time.sleep(15)
 
         while open('Queue.txt', 'r').read() != queueNum:
             time.sleep(1.7)
-            if open('Queue.txt', 'r').read() == '0':
-                open('Queue.txt', 'w').write(queueNum)
             continue
 
-        while open('MouseUsed.txt', 'r').read() == 'T':
-            time.sleep(waitTime)
-            continue
         print("In Loop")
-        f = open('MouseUsed.txt', 'w')
-        f.write('T')
-        f.close()
+
         while True:
             time.sleep(15)
             connectButton = pyautogui.locateCenterOnScreen('Image50/Connect50.png', region = region, confidence = 0.7)
@@ -32,34 +29,19 @@ try:
                 time.sleep(1)
                 pyautogui.click(center)
                 time.sleep(1)
+                pyautogui.click(center)
+                time.sleep(1)
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('Connect Not Found -- Reloading')
-                f = open('MouseUsed.txt', 'w')
-                f.write('F')
-                f.close()
                 continue
             pyautogui.moveTo(connectButton[0], connectButton[1])
             pyautogui.click(connectButton[0], connectButton[1])
+            time.sleep(1)
+            pyautogui.click(connectButton[0], connectButton[1])
+            time.sleep(1)
             print('Connecting Wallet...')
             break
-        time.sleep(5)
-
-        # mmButton = pyautogui.locateCenterOnScreen('Image50/Meta50.png', region = region, confidence = 0.7)
-        # if mmButton == None:
-        #     pyautogui.moveTo(center)
-        #     time.sleep(0.5)
-        #     pyautogui.click(center)
-        #     time.sleep(0.5)
-        #     pyautogui.hotkey('ctrl', 'shift', 'r')
-        #     print('MetaMask Not Found -- Reloading')
-        #     f = open('MouseUsed.txt', 'w')
-        #     f.write('F')
-        #     f.close()
-        #     continue
-        # pyautogui.moveTo(mmButton[0], mmButton[1])
-        # pyautogui.click(mmButton[0], mmButton[1])
-        # print('Signing MetaMask...')
-        # time.sleep(5)
+        time.sleep(10)
 
         while True:
             signButton = pyautogui.locateCenterOnScreen('Image50/Sign50.png', region = region, confidence = 0.7)
@@ -70,21 +52,18 @@ try:
                 time.sleep(1)
                 pyautogui.hotkey('ctrl', 'shift', 'r')
                 print('MetaMask Not Found -- Reloading')
-                f = open('MouseUsed.txt', 'w')
-                f.write('F')
-                f.close()
                 break
             pyautogui.moveTo(signButton[0], signButton[1])
             pyautogui.click(signButton[0], signButton[1])
+            time.sleep(1)
+            pyautogui.click(signButton[0], signButton[1])
+            time.sleep(1)
             print('Loading...')
             break
-        f = open('MouseUsed.txt', 'w')
-        f.write('F')
-        f.close()
         open('Queue.txt', 'w').write(nextQueue)
         time.sleep(15)
 
-        while True:
+        while isError == False:
             connectButton = None
             mmButton = None
             signButton = None
@@ -93,6 +72,8 @@ try:
             workButton = None
             closeHero = None
             error = None
+            errorIdle = None
+            backButton = None
             timeResetCount = 0
             timeRestartCount = 0
             timeCheck = 0
@@ -100,30 +81,32 @@ try:
 
             while open('Queue.txt', 'r').read() != queueNum:
                 time.sleep(1.7)
-                if open('Queue.txt', 'r').read() == '0':
-                    open('Queue.txt', 'w').write(queueNum)
                 continue
-
-            while open('MouseUsed.txt', 'r').read() == 'T':
-                time.sleep(waitTime)
-                continue
-            f = open('MouseUsed.txt', 'w')
-            f.write('T')
-            f.close()
 
             selectHero = pyautogui.locateCenterOnScreen('Image50/Hero50.png', region = region, confidence = 0.7)
             error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
+            errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
 
             if error != None:
+                pyautogui.moveTo(error[0], error[1])
+                time.sleep(1)
                 pyautogui.click(error[0], error[1])
-                time.sleep(0.5)
-                pyautogui.hotkey('ctrl', 'shift', 'r')
+                time.sleep(1)
+                pyautogui.hotkey('ctrl', 'r')
                 print('Error -- Reloading')
                 isError = True
                 time.sleep(5)
-                f = open('MouseUsed.txt', 'w')
-                f.write('F')
-                f.close()
+                open('Queue.txt', 'w').write(nextQueue)
+                break
+            if errorIdle != None:
+                pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                time.sleep(1)
+                pyautogui.click(errorIdle[0], errorIdle[1])
+                time.sleep(1)
+                pyautogui.hotkey('ctrl', 'r')
+                print('Idle -- Reloading')
+                isError = True
+                time.sleep(5)
                 open('Queue.txt', 'w').write(nextQueue)
                 break
             if selectHero == None :
@@ -133,9 +116,6 @@ try:
                 time.sleep(0.5)
                 pyautogui.hotkey('ctrl', 'shift,' 'r')
                 print('Cant Load Game -- Reload')
-                f = open('MouseUsed.txt', 'w')
-                f.write('F')
-                f.close()
                 open('Queue.txt', 'w').write(nextQueue)
                 break
             pyautogui.moveTo(selectHero[0], selectHero[1])
@@ -149,21 +129,30 @@ try:
             while isError == False:
                 homeButton = pyautogui.locateCenterOnScreen('Image50/Home50.png', region = region, confidence = 0.7)
                 error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
+                errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
                 
                 if error != None:
+                    pyautogui.moveTo(error[0], error[1])
+                    time.sleep(1)
                     pyautogui.click(error[0], error[1])
-                    time.sleep(0.5)
-                    pyautogui.hotkey('ctrl', 'shift', 'r')
+                    time.sleep(1)
+                    pyautogui.hotkey('ctrl', 'r')
                     print('Error -- Reloading')
                     isError = True
                     time.sleep(5)
-                    f = open('MouseUsed.txt', 'w')
-                    f.write('F')
-                    f.close()
-                    f = open('Queue.txt', 'w')
-                    f.write('0')
-                    f.close
-                    continue
+                    open('Queue.txt', 'w').write(nextQueue)
+                    break
+                if errorIdle != None:
+                    pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                    time.sleep(1)
+                    pyautogui.click(errorIdle[0], errorIdle[1])
+                    time.sleep(1)
+                    pyautogui.hotkey('ctrl', 'r')
+                    print('Idle -- Reloading')
+                    isError = True
+                    time.sleep(5)
+                    open('Queue.txt', 'w').write(nextQueue)
+                    break
                 if homeButton == None:
                     continue
                 pyautogui.moveTo(homeButton[0], homeButton[1])
@@ -182,22 +171,29 @@ try:
                 while True:
                     workButton = pyautogui.locateCenterOnScreen('Image50/Work50.png', region = region, confidence = 0.95)
                     error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
+                    errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
                     workError = pyautogui.locateCenterOnScreen('Image50/WorkError50.png', region = region, confidence = 0.7)
                     if error != None:
                         pyautogui.moveTo(error[0], error[1])
                         time.sleep(1)
                         pyautogui.click(error[0], error[1])
                         time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'shift', 'r')
+                        pyautogui.hotkey('ctrl', 'r')
                         print('Error -- Reloading')
                         isError = True
                         time.sleep(5)
-                        f = open('MouseUsed.txt', 'w')
-                        f.write('F')
-                        f.close()
-                        f = open('Queue.txt', 'w')
-                        f.write('0')
-                        f.close
+                        open('Queue.txt', 'w').write(nextQueue)
+                        break
+                    if errorIdle != None:
+                        pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                        time.sleep(1)
+                        pyautogui.click(errorIdle[0], errorIdle[1])
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'r')
+                        print('Idle -- Reloading')
+                        isError = True
+                        time.sleep(5)
+                        open('Queue.txt', 'w').write(nextQueue)
                         break
                     if workError != None:
                         pyautogui.moveTo(workError[0], workError[1])
@@ -208,12 +204,7 @@ try:
                         print('Error -- Reloading')
                         isError = True
                         time.sleep(5)
-                        f = open('MouseUsed.txt', 'w')
-                        f.write('F')
-                        f.close()
-                        f = open('Queue.txt', 'w')
-                        f.write('0')
-                        f.close
+                        open('Queue.txt', 'w').write(nextQueue)
                         break
                     if workButton != None:
                         pyautogui.click(workButton[0], workButton[1])
@@ -226,6 +217,7 @@ try:
             while isError == False:
                 closeHero = pyautogui.locateCenterOnScreen('Image50/CloseHero50.png', region = region, confidence = 0.7)
                 error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
+                errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
                 
                 if error != None:
                     pyautogui.moveTo(error[0], error[1])
@@ -236,12 +228,18 @@ try:
                     isError = True
                     print('Error -- Reloading')
                     time.sleep(5)
-                    f = open('MouseUsed.txt', 'w')
-                    f.write('F')
-                    f.close()
-                    f = open('Queue.txt', 'w')
-                    f.write('0')
-                    f.close
+                    open('Queue.txt', 'w').write(nextQueue)
+                    break
+                if errorIdle != None:
+                    pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                    time.sleep(1)
+                    pyautogui.click(errorIdle[0], errorIdle[1])
+                    time.sleep(1)
+                    pyautogui.hotkey('ctrl', 'r')
+                    print('Idle -- Reloading')
+                    isError = True
+                    time.sleep(5)
+                    open('Queue.txt', 'w').write(nextQueue)
                     break
                 if closeHero == None:
                     continue
@@ -256,22 +254,29 @@ try:
                 error = None
                 hunt = pyautogui.locateCenterOnScreen('Image50/Hunt50.png', region = region, confidence = 0.7)
                 error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
+                errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
                 if error != None:
                     pyautogui.moveTo(error[0], error[1])
                     time.sleep(1)
                     pyautogui.click(error[0], error[1])
                     time.sleep(1)
-                    pyautogui.hotkey('ctrl', 'shift', 'r')
+                    pyautogui.hotkey('ctrl', 'r')
                     isError = True
                     print('Error -- Reloading')
                     time.sleep(5)
-                    f = open('MouseUsed.txt', 'w')
-                    f.write('F')
-                    f.close()
-                    f = open('Queue.txt', 'w')
-                    f.write('0')
-                    f.close
+                    open('Queue.txt', 'w').write(nextQueue)
                     continue
+                if errorIdle != None:
+                    pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                    time.sleep(1)
+                    pyautogui.click(errorIdle[0], errorIdle[1])
+                    time.sleep(1)
+                    pyautogui.hotkey('ctrl', 'r')
+                    print('Idle -- Reloading')
+                    isError = True
+                    time.sleep(5)
+                    open('Queue.txt', 'w').write(nextQueue)
+                    break
                 if(hunt == None):
                     continue
                 pyautogui.moveTo(hunt[0], hunt[1])
@@ -280,9 +285,6 @@ try:
                 time.sleep(0.5)
                 pyautogui.click(hunt[0], hunt[1])
                 print('Start...')
-                f = open('MouseUsed.txt', 'w')
-                f.write('F')
-                f.close()
                 open('Queue.txt', 'w').write(nextQueue)
                 break
             
@@ -295,64 +297,63 @@ try:
 
                 while open('Queue.txt', 'r').read() != queueNum:
                     time.sleep(1.7)
-                    if open('Queue.txt', 'r').read() == '0':
-                        open('Queue.txt', 'w').write(queueNum)
                     continue
 
-                while open('MouseUsed.txt', 'r').read() == 'T':
-                    time.sleep(waitTime)
-                    continue
-                f = open('MouseUsed.txt', 'w')
-                f.write('T')
-                f.close()
                 error = None
+                errorIdle = None
                 error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
-                if timeCheck >= 120:
+                errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
+                if timeCheck >= newMapTimer:
                     newMap = pyautogui.locateCenterOnScreen('Image50/NewMap50.png', region = region, confidence = 0.7)
                     if error != None:
                         pyautogui.moveTo(error[0], error[1])
                         time.sleep(1)
                         pyautogui.click(error[0], error[1])
                         time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'shift', 'r')
+                        pyautogui.hotkey('ctrl', 'r')
                         isError = True
                         print('Error -- Reloading')
                         time.sleep(5)
-                        f = open('MouseUsed.txt', 'w')
-                        f.write('F')
-                        f.close()
-                        f = open('Queue.txt', 'w')
-                        f.write('0')
-                        f.close
+                        break
+                    if errorIdle != None:
+                        pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                        time.sleep(1)
+                        pyautogui.click(errorIdle[0], errorIdle[1])
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'r')
+                        print('Idle -- Reloading')
+                        isError = True
+                        time.sleep(5)
                         break
                     if newMap != None:
                         pyautogui.moveTo(newMap[0], newMap[1])
                         time.sleep(1)
                         pyautogui.click(newMap[0], newMap[1])
                         print('Change Map...')
-                        f = open('MouseUsed.txt', 'w')
-                        f.write('F')
-                        f.close()
-                        f = open('Queue.txt', 'w')
-                        f.write('0')
-                        f.close
+                        open('Queue.txt', 'w').write(nextQueue)
                     
                     timeCheck = 0
 
-                if timeResetCount >= 180:
+                if timeResetCount >= RepositionTimer and isError == False:
                     if error != None:
+                        pyautogui.moveTo(error[0], error[1])
+                        time.sleep(1)
                         pyautogui.click(error[0], error[1])
                         time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'shift', 'r')
+                        pyautogui.hotkey('ctrl', 'r')
                         isError = True
                         print('Error -- Reloading')
                         time.sleep(5)
-                        f = open('MouseUsed.txt', 'w')
-                        f.write('F')
-                        f.close()
-                        f = open('Queue.txt', 'w')
-                        f.write('0')
-                        f.close
+                        break
+                    if errorIdle != None:
+                        pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                        time.sleep(1)
+                        pyautogui.click(errorIdle[0], errorIdle[1])
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'r')
+                        print('Idle -- Reloading')
+                        isError = True
+                        time.sleep(5)
                         break
                     backButton = pyautogui.locateCenterOnScreen('Image50/Back50.png', region = region, confidence = 0.7)
                     if backButton == None:
@@ -369,23 +370,28 @@ try:
                     pyautogui.click(hunt[0], hunt[1])
                     timeResetCount = 0
                 
-                if timeRestartCount >= 1800:
+                if timeRestartCount >= ResetTimer and isError == False:
                     if error != None:
                         pyautogui.moveTo(error[0], error[1])
                         time.sleep(1)
                         pyautogui.click(error[0], error[1])
                         time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'shift', 'r')
+                        pyautogui.hotkey('ctrl', 'r')
                         isError = True
                         print('Error -- Reloading')
                         time.sleep(5)
-                        f = open('MouseUsed.txt', 'w')
-                        f.write('F')
-                        f.close()
-                        f = open('Queue.txt', 'w')
-                        f.write('0')
-                        f.close
                         break
+                    if errorIdle != None:
+                        pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                        time.sleep(1)
+                        pyautogui.click(errorIdle[0], errorIdle[1])
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'r')
+                        print('Idle -- Reloading')
+                        isError = True
+                        time.sleep(5)
+                        break
+                    backButton = pyautogui.locateCenterOnScreen('Image50/Back50.png', region = region, confidence = 0.7)
                     if backButton != None:
                         pyautogui.moveTo(backButton[0], backButton[1])
                         time.sleep(1)
@@ -401,22 +407,13 @@ try:
                     f.close()
                     print('Restarting Flow...')
                     break
-                f = open('MouseUsed.txt', 'w')
-                f.write('F')
-                f.close()
                 open('Queue.txt', 'w').write(nextQueue)
                 time.sleep(60)
             
             if isError == True:
-                f = open('MouseUsed.txt', 'w')
-                f.write('F')
-                f.close()
                 open('Queue.txt', 'w').write(nextQueue)
                 break
             else:
-                f = open('MouseUsed.txt', 'w')
-                f.write('F')
-                f.close()
                 open('Queue.txt', 'w').write(nextQueue)
                 continue
 
