@@ -4,35 +4,8 @@ import time
 
 region = (0, 0, 550, 600)
 
-error = None
-errorIdle = None
-error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
-errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
-
-if error != None:
-    pyautogui.moveTo(error[0], error[1])
-    time.sleep(1)
-    pyautogui.click(error[0], error[1])
-    time.sleep(1)
-    pyautogui.hotkey('ctrl', 'r')
-    isError = True
-    print('Error -- Reloading')
-    time.sleep(5)
-if errorIdle != None:
-    pyautogui.moveTo(errorIdle[0], errorIdle[1])
-    time.sleep(1)
-    pyautogui.click(errorIdle[0], errorIdle[1])
-    time.sleep(1)
-    pyautogui.hotkey('ctrl', 'r')
-    print('Idle -- Reloading')
-    isError = True
-    time.sleep(5)
-backButton = pyautogui.locateCenterOnScreen('Image50/Back50.png', region = region, confidence = 0.7)
-if backButton != None:
-    pyautogui.moveTo(backButton[0], backButton[1])
-    time.sleep(1)
-    pyautogui.click(backButton[0], backButton[1])
-
+workAllButton = pyautogui.locateCenterOnScreen('Image50/WorkAll50.png', region = region, confidence = 0.7)
+pyautogui.click(workAllButton[0], workAllButton[1])
 # pyautogui.displayMousePosition()
 
 # backButton = pyautogui.locateCenterOnScreen('Image/Back67.png', region = (0, 0, 750, 600), confidence = 0.7)

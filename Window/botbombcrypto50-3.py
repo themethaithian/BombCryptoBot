@@ -35,6 +35,7 @@ try:
                 print('Connect Not Found -- Reloading')
                 continue
             pyautogui.moveTo(connectButton[0], connectButton[1])
+            time.sleep(1)
             pyautogui.click(connectButton[0], connectButton[1])
             time.sleep(1)
             pyautogui.click(connectButton[0], connectButton[1])
@@ -54,6 +55,7 @@ try:
                 print('MetaMask Not Found -- Reloading')
                 break
             pyautogui.moveTo(signButton[0], signButton[1])
+            time.sleep(1)
             pyautogui.click(signButton[0], signButton[1])
             time.sleep(1)
             pyautogui.click(signButton[0], signButton[1])
@@ -69,7 +71,7 @@ try:
             signButton = None
             selectHero = None
             homeButton = None
-            workButton = None
+            workAllButton = None
             closeHero = None
             error = None
             errorIdle = None
@@ -88,9 +90,9 @@ try:
             errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
 
             if error != None:
-                pyautogui.moveTo(error[0], error[1])
+                pyautogui.moveTo(center)
                 time.sleep(1)
-                pyautogui.click(error[0], error[1])
+                pyautogui.click(center)
                 time.sleep(1)
                 pyautogui.hotkey('ctrl', 'r')
                 print('Error -- Reloading')
@@ -99,9 +101,9 @@ try:
                 open('Queue.txt', 'w').write(nextQueue)
                 break
             if errorIdle != None:
-                pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                pyautogui.moveTo(center)
                 time.sleep(1)
-                pyautogui.click(errorIdle[0], errorIdle[1])
+                pyautogui.click(center)
                 time.sleep(1)
                 pyautogui.hotkey('ctrl', 'r')
                 print('Idle -- Reloading')
@@ -114,7 +116,7 @@ try:
                 time.sleep(0.5)
                 pyautogui.click(center)
                 time.sleep(0.5)
-                pyautogui.hotkey('ctrl', 'shift,' 'r')
+                pyautogui.hotkey('ctrl', 'r')
                 print('Cant Load Game -- Reload')
                 open('Queue.txt', 'w').write(nextQueue)
                 break
@@ -124,28 +126,28 @@ try:
             time.sleep(1)
             pyautogui.click(selectHero[0], selectHero[1])
             print('Open Heroes Screen...')
-            time.sleep(1)
+            time.sleep(2)
 
             while isError == False:
-                homeButton = pyautogui.locateCenterOnScreen('Image50/Home50.png', region = region, confidence = 0.7)
+                workAllButton = pyautogui.locateCenterOnScreen('Image50/WorkAll50.png', region = region, confidence = 0.7)
                 error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
                 errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
                 
                 if error != None:
-                    pyautogui.moveTo(error[0], error[1])
+                    pyautogui.moveTo(center)
                     time.sleep(1)
-                    pyautogui.click(error[0], error[1])
+                    pyautogui.click(center)
                     time.sleep(1)
                     pyautogui.hotkey('ctrl', 'r')
-                    print('Error -- Reloading')
                     isError = True
+                    print('Error -- Reloading')
                     time.sleep(5)
                     open('Queue.txt', 'w').write(nextQueue)
                     break
                 if errorIdle != None:
-                    pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                    pyautogui.moveTo(center)
                     time.sleep(1)
-                    pyautogui.click(errorIdle[0], errorIdle[1])
+                    pyautogui.click(center)
                     time.sleep(1)
                     pyautogui.hotkey('ctrl', 'r')
                     print('Idle -- Reloading')
@@ -153,66 +155,13 @@ try:
                     time.sleep(5)
                     open('Queue.txt', 'w').write(nextQueue)
                     break
-                if homeButton == None:
+                if workAllButton == None:
                     continue
-                pyautogui.moveTo(homeButton[0], homeButton[1])
-                print('Scrolling Down...')
-                for s in range(60):
-                    pyautogui.moveTo(homeButton[0], homeButton[1])
-                    pyautogui.click(homeButton[0], homeButton[1])
-                    pyautogui.scroll(-1)
-                    time.sleep(0.05)
+                pyautogui.moveTo(workAllButton[0], workAllButton[1])
                 time.sleep(1)
-                break
-            heroCount = 0
-            if isError == False:
-                error = None
-                print('Bring Hero To Work...')
-                while True:
-                    workButton = pyautogui.locateCenterOnScreen('Image50/Work50.png', region = region, confidence = 0.95)
-                    error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
-                    errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
-                    workError = pyautogui.locateCenterOnScreen('Image50/WorkError50.png', region = region, confidence = 0.7)
-                    if error != None:
-                        pyautogui.moveTo(error[0], error[1])
-                        time.sleep(1)
-                        pyautogui.click(error[0], error[1])
-                        time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'r')
-                        print('Error -- Reloading')
-                        isError = True
-                        time.sleep(5)
-                        open('Queue.txt', 'w').write(nextQueue)
-                        break
-                    if errorIdle != None:
-                        pyautogui.moveTo(errorIdle[0], errorIdle[1])
-                        time.sleep(1)
-                        pyautogui.click(errorIdle[0], errorIdle[1])
-                        time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'r')
-                        print('Idle -- Reloading')
-                        isError = True
-                        time.sleep(5)
-                        open('Queue.txt', 'w').write(nextQueue)
-                        break
-                    if workError != None:
-                        pyautogui.moveTo(workError[0], workError[1])
-                        time.sleep(1)
-                        pyautogui.click(workError[0], workError[1])
-                        time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'shift', 'r')
-                        print('Error -- Reloading')
-                        isError = True
-                        time.sleep(5)
-                        open('Queue.txt', 'w').write(nextQueue)
-                        break
-                    if workButton != None:
-                        pyautogui.click(workButton[0], workButton[1])
-                        heroCount += 1
-                        print('Hero: ', heroCount)
-                        time.sleep(1)
-                        continue
-                    break
+                pyautogui.click(workAllButton[0], workAllButton[1])
+                time.sleep(1)
+                break 
 
             while isError == False:
                 closeHero = pyautogui.locateCenterOnScreen('Image50/CloseHero50.png', region = region, confidence = 0.7)
@@ -220,20 +169,20 @@ try:
                 errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
                 
                 if error != None:
-                    pyautogui.moveTo(error[0], error[1])
+                    pyautogui.moveTo(center)
                     time.sleep(1)
-                    pyautogui.click(error[0], error[1])
+                    pyautogui.click(center)
                     time.sleep(1)
-                    pyautogui.hotkey('ctrl', 'shift', 'r')
+                    pyautogui.hotkey('ctrl', 'r')
                     isError = True
                     print('Error -- Reloading')
                     time.sleep(5)
                     open('Queue.txt', 'w').write(nextQueue)
                     break
                 if errorIdle != None:
-                    pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                    pyautogui.moveTo(center)
                     time.sleep(1)
-                    pyautogui.click(errorIdle[0], errorIdle[1])
+                    pyautogui.click(center)
                     time.sleep(1)
                     pyautogui.hotkey('ctrl', 'r')
                     print('Idle -- Reloading')
@@ -256,9 +205,9 @@ try:
                 error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
                 errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
                 if error != None:
-                    pyautogui.moveTo(error[0], error[1])
+                    pyautogui.moveTo(center)
                     time.sleep(1)
-                    pyautogui.click(error[0], error[1])
+                    pyautogui.click(center)
                     time.sleep(1)
                     pyautogui.hotkey('ctrl', 'r')
                     isError = True
@@ -267,9 +216,9 @@ try:
                     open('Queue.txt', 'w').write(nextQueue)
                     continue
                 if errorIdle != None:
-                    pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                    pyautogui.moveTo(center)
                     time.sleep(1)
-                    pyautogui.click(errorIdle[0], errorIdle[1])
+                    pyautogui.click(center)
                     time.sleep(1)
                     pyautogui.hotkey('ctrl', 'r')
                     print('Idle -- Reloading')
@@ -293,7 +242,6 @@ try:
             while isError == False:
                 timeResetCount += 60
                 timeRestartCount += 60
-                timeCheck += 60
 
                 while open('Queue.txt', 'r').read() != queueNum:
                     time.sleep(1.7)
@@ -303,42 +251,12 @@ try:
                 errorIdle = None
                 error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
                 errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
-                if timeCheck >= newMapTimer:
-                    newMap = pyautogui.locateCenterOnScreen('Image50/NewMap50.png', region = region, confidence = 0.7)
-                    if error != None:
-                        pyautogui.moveTo(error[0], error[1])
-                        time.sleep(1)
-                        pyautogui.click(error[0], error[1])
-                        time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'r')
-                        isError = True
-                        print('Error -- Reloading')
-                        time.sleep(5)
-                        break
-                    if errorIdle != None:
-                        pyautogui.moveTo(errorIdle[0], errorIdle[1])
-                        time.sleep(1)
-                        pyautogui.click(errorIdle[0], errorIdle[1])
-                        time.sleep(1)
-                        pyautogui.hotkey('ctrl', 'r')
-                        print('Idle -- Reloading')
-                        isError = True
-                        time.sleep(5)
-                        break
-                    if newMap != None:
-                        pyautogui.moveTo(newMap[0], newMap[1])
-                        time.sleep(1)
-                        pyautogui.click(newMap[0], newMap[1])
-                        print('Change Map...')
-                        open('Queue.txt', 'w').write(nextQueue)
-                    
-                    timeCheck = 0
 
                 if timeResetCount >= RepositionTimer and isError == False:
                     if error != None:
-                        pyautogui.moveTo(error[0], error[1])
+                        pyautogui.moveTo(center)
                         time.sleep(1)
-                        pyautogui.click(error[0], error[1])
+                        pyautogui.click(center)
                         time.sleep(1)
                         pyautogui.hotkey('ctrl', 'r')
                         isError = True
@@ -346,9 +264,9 @@ try:
                         time.sleep(5)
                         break
                     if errorIdle != None:
-                        pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                        pyautogui.moveTo(center)
                         time.sleep(1)
-                        pyautogui.click(errorIdle[0], errorIdle[1])
+                        pyautogui.click(center)
                         time.sleep(1)
                         pyautogui.hotkey('ctrl', 'r')
                         print('Idle -- Reloading')
@@ -372,9 +290,9 @@ try:
                 
                 if timeRestartCount >= ResetTimer and isError == False:
                     if error != None:
-                        pyautogui.moveTo(error[0], error[1])
+                        pyautogui.moveTo(center)
                         time.sleep(1)
-                        pyautogui.click(error[0], error[1])
+                        pyautogui.click(center)
                         time.sleep(1)
                         pyautogui.hotkey('ctrl', 'r')
                         isError = True
@@ -382,9 +300,9 @@ try:
                         time.sleep(5)
                         break
                     if errorIdle != None:
-                        pyautogui.moveTo(errorIdle[0], errorIdle[1])
+                        pyautogui.moveTo(center)
                         time.sleep(1)
-                        pyautogui.click(errorIdle[0], errorIdle[1])
+                        pyautogui.click(center)
                         time.sleep(1)
                         pyautogui.hotkey('ctrl', 'r')
                         print('Idle -- Reloading')
