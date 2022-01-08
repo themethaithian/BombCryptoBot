@@ -81,6 +81,8 @@ try:
             timeRestartCount = 0
             timeCheck = 0
             isError = False
+            hunt = None
+            backButton = None
 
             while open('Queue.txt', 'r').read() != queueNum:
                 time.sleep(1.7)
@@ -157,7 +159,15 @@ try:
                     open('Queue.txt', 'w').write(nextQueue)
                     break
                 if workAllButton == None:
-                    continue
+                    pyautogui.moveTo(center)
+                    time.sleep(1)
+                    pyautogui.click(center)
+                    time.sleep(1)
+                    pyautogui.hotkey('ctrl', 'r')
+                    isError = True
+                    time.sleep(5)
+                    open('Queue.txt', 'w').write(nextQueue)
+                    break
                 pyautogui.moveTo(workAllButton[0], workAllButton[1])
                 time.sleep(1)
                 pyautogui.click(workAllButton[0], workAllButton[1])
@@ -192,7 +202,15 @@ try:
                     open('Queue.txt', 'w').write(nextQueue)
                     break
                 if closeHero == None:
-                    continue
+                    pyautogui.moveTo(center)
+                    time.sleep(1)
+                    pyautogui.click(center)
+                    time.sleep(1)
+                    pyautogui.hotkey('ctrl', 'r')
+                    isError = True
+                    time.sleep(5)
+                    open('Queue.txt', 'w').write(nextQueue)
+                    break
                 pyautogui.moveTo(closeHero[0], closeHero[1])
                 time.sleep(1)
                 pyautogui.click(closeHero[0], closeHero[1])
@@ -227,8 +245,16 @@ try:
                     time.sleep(5)
                     open('Queue.txt', 'w').write(nextQueue)
                     break
-                if(hunt == None):
-                    continue
+                if hunt == None:
+                    pyautogui.moveTo(center)
+                    time.sleep(1)
+                    pyautogui.click(center)
+                    time.sleep(1)
+                    pyautogui.hotkey('ctrl', 'r')
+                    isError = True
+                    time.sleep(5)
+                    open('Queue.txt', 'w').write(nextQueue)
+                    break
                 pyautogui.moveTo(hunt[0], hunt[1])
                 time.sleep(1)
                 pyautogui.click(hunt[0], hunt[1])
@@ -243,6 +269,8 @@ try:
             while isError == False:
                 timeResetCount += 60
                 timeRestartCount += 60
+                hunt = None
+                backButton = None
 
                 while open('Queue.txt', 'r').read() != queueNum:
                     time.sleep(1.7)
@@ -250,10 +278,11 @@ try:
 
                 error = None
                 errorIdle = None
-                error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
-                errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
 
                 if timeResetCount >= RepositionTimer and isError == False:
+                    error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
+                    errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
+                    
                     if error != None:
                         pyautogui.moveTo(center)
                         time.sleep(1)
@@ -276,7 +305,15 @@ try:
                         break
                     backButton = pyautogui.locateCenterOnScreen('Image50/Back50.png', region = region, confidence = 0.7)
                     if backButton == None:
-                        continue
+                        pyautogui.moveTo(center)
+                        time.sleep(1)
+                        pyautogui.click(center)
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'r')
+                        print('Idle -- Reloading')
+                        isError = True
+                        time.sleep(5)
+                        break
                     elif backButton != None:
                         pyautogui.moveTo(backButton[0], backButton[1])
                         time.sleep(1)
@@ -284,12 +321,26 @@ try:
                     resetCount += 1
                     print('Reseting Position - ', resetCount)
                     time.sleep(2)
-                    pyautogui.moveTo(hunt[0], hunt[1])
-                    time.sleep(1)
-                    pyautogui.click(hunt[0], hunt[1])
+                    hunt = pyautogui.locateCenterOnScreen('Image50/Hunt50.png', region = region, confidence = 0.7)
+                    if hunt == None:
+                        pyautogui.moveTo(center)
+                        time.sleep(1)
+                        pyautogui.click(center)
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'r')
+                        print('Idle -- Reloading')
+                        isError = True
+                        time.sleep(5)
+                        break
+                    else:
+                        pyautogui.moveTo(hunt[0], hunt[1])
+                        time.sleep(1)
+                        pyautogui.click(hunt[0], hunt[1])
                     timeResetCount = 0
                 
                 if timeRestartCount >= ResetTimer and isError == False:
+                    error = pyautogui.locateCenterOnScreen('Image50/Error50.png', region = region, confidence = 0.7)
+                    errorIdle = pyautogui.locateCenterOnScreen('Image50/ErrorIdle50.png', region = region, confidence = 0.7)
                     if error != None:
                         pyautogui.moveTo(center)
                         time.sleep(1)
@@ -311,14 +362,22 @@ try:
                         time.sleep(5)
                         break
                     backButton = pyautogui.locateCenterOnScreen('Image50/Back50.png', region = region, confidence = 0.7)
-                    if backButton != None:
+                    if backButton == None:
+                        pyautogui.moveTo(center)
+                        time.sleep(1)
+                        pyautogui.click(center)
+                        time.sleep(1)
+                        pyautogui.hotkey('ctrl', 'r')
+                        print('Idle -- Reloading')
+                        isError = True
+                        time.sleep(5)
+                        break
+                    else:
                         pyautogui.moveTo(backButton[0], backButton[1])
                         time.sleep(1)
                         pyautogui.click(backButton[0], backButton[1])
                         time.sleep(0.5)
                         pyautogui.click(backButton[0], backButton[1])
-                    time.sleep(0.5)
-                    pyautogui.click(backButton[0], backButton[1])
                     time.sleep(5)
                     isError = False
                     f = open('MouseUsed.txt', 'w')
