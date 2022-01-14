@@ -1,7 +1,8 @@
 import pyautogui
 import time
 
-region = (1100, 0, 550, 600)
+region = (1100, 0, 550, 375)
+regionForMM = (1100, 0, 550, 600)
 center = (region[0] + region[2] / 2, region[1] + 375 / 2 )
 waitTime = 3.2
 queueNum = '3'
@@ -45,7 +46,7 @@ try:
         time.sleep(10)
 
         while True:
-            signButton = pyautogui.locateCenterOnScreen('Image50/Sign50.png', region = region, confidence = 0.7)
+            signButton = pyautogui.locateCenterOnScreen('Image50/Sign50.png', region = regionForMM, confidence = 0.7)
             if signButton == None:
                 pyautogui.moveTo(center)
                 time.sleep(1)
