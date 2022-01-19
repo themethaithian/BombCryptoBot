@@ -159,20 +159,11 @@ try:
                     time.sleep(5)
                     open('Queue.txt', 'w').write(nextQueue)
                     break
-                if workAllButton == None:
-                    pyautogui.moveTo(center)
+                if workAllButton != None:
+                    pyautogui.moveTo(workAllButton[0], workAllButton[1])
                     time.sleep(1)
-                    pyautogui.click(center)
+                    pyautogui.click(workAllButton[0], workAllButton[1])
                     time.sleep(1)
-                    pyautogui.hotkey('ctrl', 'r')
-                    isError = True
-                    time.sleep(5)
-                    open('Queue.txt', 'w').write(nextQueue)
-                    break
-                pyautogui.moveTo(workAllButton[0], workAllButton[1])
-                time.sleep(1)
-                pyautogui.click(workAllButton[0], workAllButton[1])
-                time.sleep(1)
                 break 
 
             while isError == False:
